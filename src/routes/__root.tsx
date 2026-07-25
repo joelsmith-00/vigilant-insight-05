@@ -77,14 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Sentinel — Conversational Crime Intelligence for Karnataka" },
+      { name: "description", content: "Explainable, multilingual AI that closes the gap between siloed FIRs — search, network graphs, and forecasts in English or ಕನ್ನಡ." },
+      { name: "author", content: "Sentinel" },
+      { property: "og:title", content: "Sentinel — Conversational Crime Intelligence" },
+      { property: "og:description", content: "Explainable, multilingual AI for investigators, analysts and policymakers. English & ಕನ್ನಡ." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
