@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroBg from "@/assets/network-hero.jpg";
+import kspLogo from "@/assets/ksp-logo.png.asset.json";
 import {
   MessageSquare,
   Network,
@@ -92,10 +93,12 @@ function Index() {
       {/* NAV */}
       <header className="fixed top-0 z-50 w-full backdrop-blur-xl bg-background/60 border-b border-border/60">
         <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-md" style={{ background: "var(--gradient-accent)", boxShadow: "var(--shadow-glow)" }} />
-            <span className="font-semibold tracking-tight text-lg">Sentinel</span>
-            <span className="hidden sm:inline text-xs text-muted-foreground font-mono ml-2">KSP·CRIME-INTEL</span>
+          <a href="#" className="flex items-center gap-3">
+            <img src={kspLogo.url} alt="Karnataka State Police" className="h-9 w-9 object-contain" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-semibold tracking-tight text-base">Sentinel</span>
+              <span className="hidden sm:inline text-[10px] text-muted-foreground font-mono">KARNATAKA STATE POLICE</span>
+            </div>
           </a>
           <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#features" className="hover:text-foreground transition">{t.nav.features}</a>
@@ -254,7 +257,10 @@ function Index() {
       {/* FOOTER */}
       <footer className="border-t border-border/60 py-10">
         <div className="mx-auto max-w-6xl px-6 flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground font-mono">
-          <div>© Sentinel · {t.footer}</div>
+          <div className="flex items-center gap-3">
+            <img src={kspLogo.url} alt="Karnataka State Police" className="h-8 w-8 object-contain opacity-90" />
+            <span>© Sentinel · {t.footer}</span>
+          </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setLang(lang === "en" ? "kn" : "en")}
