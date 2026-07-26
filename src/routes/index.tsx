@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { setRole, type Role } from "@/lib/session";
+import { useRouter } from "@tanstack/react-router";
 import heroBg from "@/assets/network-hero.jpg";
 import kspLogo from "@/assets/ksp-logo.png.asset.json";
 import {
@@ -87,6 +90,12 @@ const copy = {
 function Index() {
   const [lang, setLang] = useState<Lang>("en");
   const t = copy[lang];
+  const router = useRouter();
+
+  const pickRole = (key: string) => {
+    setRole(key as Role);
+    router.navigate({ to: "/dashboard" });
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -195,6 +204,7 @@ function Index() {
             {t.roles.map((r, i) => (
               <button
                 key={r.key}
+                onClick={() => pickRole(r.key)}
                 className="group relative text-left rounded-xl border border-border bg-card/60 p-5 hover:border-primary/60 hover:bg-card transition overflow-hidden"
               >
                 <div className="absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100 transition" style={{ background: "var(--gradient-accent)" }} />
