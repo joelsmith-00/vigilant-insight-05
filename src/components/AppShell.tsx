@@ -4,13 +4,14 @@ import { useEffect, useState, type ReactNode } from "react";
 import kspLogo from "@/assets/ksp-logo.png.asset.json";
 import { clearRole, getRole, roleMeta, type Role } from "@/lib/session";
 
-const nav = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; soon?: boolean };
+const nav: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/chat", label: "Chat", icon: MessageSquare },
   { to: "/network", label: "Network", icon: Network, soon: true },
   { to: "/analytics", label: "Analytics", icon: TrendingUp, soon: true },
   { to: "/forecast", label: "Forecast", icon: Radar, soon: true },
-] as const;
+];
 
 export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
