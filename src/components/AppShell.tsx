@@ -1,16 +1,55 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, MessageSquare, Network, TrendingUp, Radar, LogOut, ShieldCheck } from "lucide-react";
+import {
+  LayoutDashboard,
+  MessageSquare,
+  Network,
+  TrendingUp,
+  Radar,
+  LogOut,
+  ShieldCheck,
+  UserSearch,
+  Briefcase,
+  Landmark,
+  ScrollText,
+  Settings as SettingsIcon,
+} from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import kspLogo from "@/assets/ksp-logo.png.asset.json";
 import { clearRole, getRole, roleMeta, type Role } from "@/lib/session";
 
-type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; soon?: boolean };
-const nav: NavItem[] = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/chat", label: "Chat", icon: MessageSquare },
-  { to: "/network", label: "Network", icon: Network, soon: true },
-  { to: "/analytics", label: "Analytics", icon: TrendingUp, soon: true },
-  { to: "/forecast", label: "Forecast", icon: Radar, soon: true },
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard };
+type NavGroup = { group: string; items: NavItem[] };
+const nav: NavGroup[] = [
+  {
+    group: "Operate",
+    items: [
+      { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { to: "/chat", label: "Chat", icon: MessageSquare },
+      { to: "/cases", label: "Cases", icon: Briefcase },
+    ],
+  },
+  {
+    group: "Investigate",
+    items: [
+      { to: "/network", label: "Network", icon: Network },
+      { to: "/profiles", label: "Profiles", icon: UserSearch },
+      { to: "/finance", label: "Financial links", icon: Landmark },
+    ],
+  },
+  {
+    group: "Foresight",
+    items: [
+      { to: "/patterns", label: "Patterns", icon: TrendingUp },
+      { to: "/forecast", label: "Forecast", icon: Radar },
+    ],
+  },
+  {
+    group: "Governance",
+    items: [
+      { to: "/audit", label: "Audit", icon: ScrollText },
+      { to: "/settings", label: "Settings", icon: SettingsIcon },
+    ],
+  },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -35,7 +74,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground grid" style={{ gridTemplateColumns: "240px 1fr" }}>
-      <aside className="border-r border-border/60 bg-card/30 flex flex-col">
+      <aside className="sticky top-0 flex h-screen flex-col border-r border-border/60 bg-card/30">
         <div className="h-16 px-4 flex items-center gap-3 border-b border-border/60">
           <img src={kspLogo.url} alt="KSP" className="h-8 w-8 object-contain" />
           <div className="leading-tight">
@@ -43,28 +82,36 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className="text-[10px] font-mono text-muted-foreground">KSP · PROTOTYPE</div>
           </div>
         </div>
-        <nav className="flex-1 p-3 space-y-1">
-          {nav.map((n) => {
-            const active = pathname === n.to;
-            return (
-              <Link
-                key={n.to}
-                to={n.to as any}
-                className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
-                  active
-                    ? "bg-primary/10 text-foreground border border-primary/30"
-                    : "text-muted-foreground hover:text-foreground hover:bg-card/60 border border-transparent"
-                }`}
-                onClick={(e) => {
-                  if (n.soon) e.preventDefault();
-                }}
-              >
-                <n.icon className="h-4 w-4" />
-                <span className="flex-1">{n.label}</span>
-                {n.soon && <span className="text-[9px] font-mono text-muted-foreground/70">SOON</span>}
-              </Link>
-            );
-          })}
+        <nav className="flex-1 space-y-4 overflow-y-auto p-3">
+          {nav.map((g) => (
+            <div key={g.group}>
+              <p className="px-3 pb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground/60">
+                {g.group}
+              </p>
+              <div className="space-y-0.5">
+                {g.items.map((n) => {
+                  const active = pathname === n.to;
+                  return (
+                    <Link
+                      key={n.to}
+                      to={n.to as any}
+                      className={`group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
+                        active
+                          ? "border border-primary/30 bg-primary/10 text-foreground"
+                          : "border border-transparent text-muted-foreground hover:bg-card/60 hover:text-foreground"
+                      }`}
+                    >
+                      {active && (
+                        <span className="absolute left-0 top-1/2 h-5 w-0.5 -translate-y-1/2 rounded-full bg-primary" />
+                      )}
+                      <n.icon className="h-4 w-4" />
+                      <span className="flex-1">{n.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
         <div className="p-3 border-t border-border/60">
           <div className="rounded-lg border border-border/70 bg-card/60 p-3">

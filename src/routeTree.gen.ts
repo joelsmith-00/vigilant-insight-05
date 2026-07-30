@@ -9,14 +9,52 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ProfilesRouteImport } from './routes/profiles'
+import { Route as PatternsRouteImport } from './routes/patterns'
+import { Route as NetworkRouteImport } from './routes/network'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ChatRouteImport } from './routes/chat'
+import { Route as CasesRouteImport } from './routes/cases'
+import { Route as AuditRouteImport } from './routes/audit'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilesRoute = ProfilesRouteImport.update({
+  id: '/profiles',
+  path: '/profiles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatternsRoute = PatternsRouteImport.update({
+  id: '/patterns',
+  path: '/patterns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForecastRoute = ForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -29,6 +67,16 @@ const ChatRoute = ChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesRoute = CasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditRoute = AuditRouteImport.update({
+  id: '/audit',
+  path: '/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,45 +85,156 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/cases': typeof CasesRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
+  '/forecast': typeof ForecastRoute
   '/login': typeof LoginRoute
+  '/network': typeof NetworkRoute
+  '/patterns': typeof PatternsRoute
+  '/profiles': typeof ProfilesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/cases': typeof CasesRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
+  '/forecast': typeof ForecastRoute
   '/login': typeof LoginRoute
+  '/network': typeof NetworkRoute
+  '/patterns': typeof PatternsRoute
+  '/profiles': typeof ProfilesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/audit': typeof AuditRoute
+  '/cases': typeof CasesRoute
   '/chat': typeof ChatRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
+  '/forecast': typeof ForecastRoute
   '/login': typeof LoginRoute
+  '/network': typeof NetworkRoute
+  '/patterns': typeof PatternsRoute
+  '/profiles': typeof ProfilesRoute
+  '/settings': typeof SettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chat' | '/dashboard' | '/login'
+  fullPaths:
+    | '/'
+    | '/audit'
+    | '/cases'
+    | '/chat'
+    | '/dashboard'
+    | '/finance'
+    | '/forecast'
+    | '/login'
+    | '/network'
+    | '/patterns'
+    | '/profiles'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chat' | '/dashboard' | '/login'
-  id: '__root__' | '/' | '/chat' | '/dashboard' | '/login'
+  to:
+    | '/'
+    | '/audit'
+    | '/cases'
+    | '/chat'
+    | '/dashboard'
+    | '/finance'
+    | '/forecast'
+    | '/login'
+    | '/network'
+    | '/patterns'
+    | '/profiles'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/audit'
+    | '/cases'
+    | '/chat'
+    | '/dashboard'
+    | '/finance'
+    | '/forecast'
+    | '/login'
+    | '/network'
+    | '/patterns'
+    | '/profiles'
+    | '/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditRoute: typeof AuditRoute
+  CasesRoute: typeof CasesRoute
   ChatRoute: typeof ChatRoute
   DashboardRoute: typeof DashboardRoute
+  FinanceRoute: typeof FinanceRoute
+  ForecastRoute: typeof ForecastRoute
   LoginRoute: typeof LoginRoute
+  NetworkRoute: typeof NetworkRoute
+  PatternsRoute: typeof PatternsRoute
+  ProfilesRoute: typeof ProfilesRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profiles': {
+      id: '/profiles'
+      path: '/profiles'
+      fullPath: '/profiles'
+      preLoaderRoute: typeof ProfilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patterns': {
+      id: '/patterns'
+      path: '/patterns'
+      fullPath: '/patterns'
+      preLoaderRoute: typeof PatternsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forecast': {
+      id: '/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -92,6 +251,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases': {
+      id: '/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof CasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audit': {
+      id: '/audit'
+      path: '/audit'
+      fullPath: '/audit'
+      preLoaderRoute: typeof AuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,9 +277,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditRoute: AuditRoute,
+  CasesRoute: CasesRoute,
   ChatRoute: ChatRoute,
   DashboardRoute: DashboardRoute,
+  FinanceRoute: FinanceRoute,
+  ForecastRoute: ForecastRoute,
   LoginRoute: LoginRoute,
+  NetworkRoute: NetworkRoute,
+  PatternsRoute: PatternsRoute,
+  ProfilesRoute: ProfilesRoute,
+  SettingsRoute: SettingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
