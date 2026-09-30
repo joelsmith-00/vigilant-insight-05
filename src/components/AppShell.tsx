@@ -79,7 +79,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           <img src={kspLogo.url} alt="KSP" className="h-8 w-8 object-contain" />
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">Sentinel</div>
-            <div className="text-[10px] font-mono text-muted-foreground">KSP · PROTOTYPE</div>
+            <div className="text-[10px] font-mono text-muted-foreground">KSP · PROTOTYPE v2.1</div>
           </div>
         </div>
         <nav className="flex-1 space-y-4 overflow-y-auto p-3">
